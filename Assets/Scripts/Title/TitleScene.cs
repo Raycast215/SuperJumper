@@ -1,5 +1,7 @@
 
+using System;
 using System.Collections;
+using Common.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -14,6 +16,7 @@ namespace Title
         private const float FastSpeedOffset = 0.9f;
 
         [SerializeField] private Text touchText;
+        [SerializeField] private TouchEvent touch;
 
         private float _speed;
         private bool _isFadeOut;
@@ -23,14 +26,10 @@ namespace Title
         private Color _color = Color.white;
 
         private bool _isSelected;
-        
+
         private void Awake()
         {
-            _touchButton = touchText.GetComponent<Button>();
-            
-            _touchButton.onClick.RemoveAllListeners();
-            
-            _touchButton.onClick.AddListener(MoveToLobby);
+            touch.OnTouched += MoveToLobby;
         }
 
         private void Start()
